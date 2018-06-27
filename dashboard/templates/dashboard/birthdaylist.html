@@ -7,7 +7,9 @@
 <ul>
     {% for user in users %}
     <li>
+          <a href="{% url 'dashboard:detailview' user.id %}">
         {{ user.username }} - {{ user.birth_date }}
+          </a>
     </li>
     {% endfor %}
 </ul>

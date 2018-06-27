@@ -3,6 +3,7 @@ from datetime import datetime, date
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 import birthday
+from djangoyearlessdate.models import YearlessDateField
 
 class CustomUser(AbstractUser):
     # First/last name is not a global-friendly pattern

@@ -1,0 +1,26 @@
+
+<html>
+<head>
+  <meta charset="utf-8">
+  {% load bootstrap3 %}       {# import bootstrap4/bootstrap3 #}
+  {% bootstrap_css %}         {# Embed Bootstrap CSS #}
+  {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+  {% block extrahead %}       {# Extra Resources Start #}
+  {{ form.media }}            {# Form required JS and CSS #}
+  {% endblock %}
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  {%load staticfiles%}
+<link rel="stylesheet" type="text/css" href="{% static 'users/style.css' %}"/>
+  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+</head>
+<body>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+</html>
