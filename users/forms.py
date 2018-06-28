@@ -2,10 +2,9 @@ import datetime
 
 from bootstrap_datepicker_plus import DatePickerInput
 from django import forms
-from django.contrib.admin import widgets
-from django.contrib.admin.widgets import AdminDateWidget
+
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.forms import SelectDateWidget
+
 
 from .models import CustomUser
 
