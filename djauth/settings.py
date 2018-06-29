@@ -136,3 +136,4 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_REDIRECT_URL = 'dashboard:home'
 LOGOUT_REDIRECT_URL = 'dashboard:home'
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True
