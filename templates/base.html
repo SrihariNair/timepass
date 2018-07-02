@@ -2,19 +2,27 @@
 <html>
 <head>
   <meta charset="utf-8">
+
+
+
   {% load bootstrap3 %}       {# import bootstrap4/bootstrap3 #}
   {% bootstrap_css %}         {# Embed Bootstrap CSS #}
   {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
-
   {% block extrahead %}       {# Extra Resources Start #}
   {{ form.media }}            {# Form required JS and CSS #}
   {% endblock %}
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   {%load staticfiles%}
-<link rel="stylesheet" type="text/css" href="{% static 'users/style.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'users/style.css' %}"/>
+      	<!-- BOOTSTRAP STYLES-->
+  <link href="{% static 'bootstrap.css' %}" rel="stylesheet" />
+
+     <!-- FONTAWESOME STYLES-->
+  <link href="{% static 'font-awesome.css' %}" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+  <link href="{% static 'custom.css' %}" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
 
   <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
@@ -23,6 +31,15 @@
   <main>
     {% block content %}
     {% endblock %}
+         <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="{% static 'jquery-1.10.2.js' %}"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="{% static 'custom.js' %}"></script>
+
   </main>
 </body>
 </html>

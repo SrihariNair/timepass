@@ -27,5 +27,7 @@ class CustomUser(AbstractUser):
 
     answer=models.CharField(blank=True, max_length=255)
 
+    resume=models.FileField()
+
     def __str__(self):
         return self.email

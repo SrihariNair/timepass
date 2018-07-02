@@ -8,14 +8,12 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from .models import CustomUser
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         now = datetime.datetime.now()
-        fields = ('username', 'email', 'gender', 'security_question', 'answer', 'birth_date',)
+        fields = ('username', 'email', 'gender', 'security_question', 'answer', 'birth_date', 'resume')
         widgets={
             'birth_date' :DatePickerInput(
                 options={

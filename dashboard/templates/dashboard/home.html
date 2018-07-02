@@ -1,15 +1,22 @@
-{% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
+{% extends 'dashboard/sidebar.html' %}
+{% block mainpage %}
 {% if user.is_authenticated %}
-  <h3>Heyyyyyyyyyyyyyyyyyyyyyyy{{ user.username }}!</h3>
-  <a href="{% url 'dashboard:birthday_list' %}">Birthday List</a>
-  <p><a href="{% url 'logout' %}">logout</a></p>
+<div id="page-wrapper">
+  <div id="page-inner">
+  <h3>Hey {{ user.username }}!</h3>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a> |
   <a href="{% url 'users:signup' %}">signup</a>
 {% endif %}
+  </div>
+</div>
+
 {% endblock %}
+
+
+{% block homeactive %}
+                     <li class="active-link">
+                        <a href="{% url 'dashboard:home' %}" ><i class="fa fa-desktop "></i>Home</a>
+                    </li>
+                    {% endblock %}
