@@ -1,8 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'dashboard/sidebar.html' %}
 
 {% block title %}Detail View{% endblock %}
 
-{% block content %}
-<h1>HI {{users.username}}</h1>
-<h1>this is ur profile view</h1>
+{% block mainpage %}
+<div id="page-wrapper" >
+            <div id="page-inner">
+                <h1>HI {{users.username}}</h1>
+                <h1>this is ur profile view</h1>
+            </div>
+</div>
 {% endblock %}
+
+{% block profileactive %}
+                    <li class="active-link">
+                        <a href="{% url 'dashboard:detailview' user.id %}"><i class="fa fa-table "></i>Profile</a>
+                    </li>
+                    {% endblock %}

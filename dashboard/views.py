@@ -1,9 +1,11 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django.views import generic
+from .forms import PostForm
 
 from users.models import CustomUser
 
+from .models import Userpost
 
 
 def birthdaylist(request):
@@ -33,3 +35,18 @@ def home(request):
         return render(request,'dashboard/home.html')
     else:
         return redirect('login')
+
+
+def leaveapplications(request):
+    leaves = Userpost.objects.all()
+    context = {
+        'leaves': leaves
+    }
+    if (request.user.is_authenticated):
+        return render(request, 'dashboard/leaveapplications.html', context=context)
+    else:
+        return redirect('login')
+
+class userposts(generic.CreateView):
+    form_class = PostForm
+    template_name = 'dashboard/posts.html'

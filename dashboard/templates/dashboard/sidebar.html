@@ -14,8 +14,8 @@
                         <h2>CATEINA</h2>
                     </a>
                 </div>
-
                  <span class="logout-spn" >
+
                   <a href="{% url 'login' %}" style="color:#fff;">LOGOUT</a>
 
                 </span>
@@ -34,7 +34,7 @@
 
                     {% block profileactive %}
                     <li>
-                        <a href="#"><i class="fa fa-table "></i>Profile</a>
+                        <a href="{% url 'dashboard:detailview' user.id %}"><i class="fa fa-table "></i>Profile</a>
                     </li>
                     {% endblock %}
 
@@ -49,20 +49,6 @@
                       <a href="{% url 'dashboard:birthday_list' %}"><i class="fa fa-qrcode "></i>Birthday List</a>
                     </li>
                     {% endblock %}
-
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i>My Link Two</a>
-                    </li>
-
-                    <li>
-                        <a href="#"><i class="fa fa-edit "></i>My Link Three </a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-table "></i>My Link Four</a>
-                    </li>
-                     <li>
-                        <a href="#"><i class="fa fa-edit "></i>My Link Five </a>
-                    </li>
                 </ul>
                             </div>
 

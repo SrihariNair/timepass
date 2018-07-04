@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Leave Applications{% endblock %}
+{% block content %}
+
+
+
+{% for obj in leaves %}
+
+<br>
+{{obj.title}}
+<br>
+{{obj.text}}
+<br>
+{{obj.created_date}}
+<br>
+{{obj.approval}}
+<br>
+----------------------------------------------------------
+
+{% endfor %}
+{% endblock %}
