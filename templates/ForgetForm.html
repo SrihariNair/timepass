@@ -1,0 +1,16 @@
+{% if error_message %}
+    {{ error_message }}
+{% endif %}
+
+
+
+<form method="post" action="">
+    {% csrf_token %}
+
+    <label for="username">
+        Username
+    </label>
+     <input type="text" name="username">
+
+     <button type="submit">GO ahead</button>
+</form>

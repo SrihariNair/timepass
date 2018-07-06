@@ -1,17 +1,33 @@
+from calendar import month
 
+from django.db.models.functions import Extract
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import generic
+from django.utils import timezone
+from django.views import generic, View
 from .forms import PostForm
 
 from users.models import CustomUser
 
-from .models import Userpost
+from .models import Post
 
 
 def birthdaylist(request):
     if(request.user.is_authenticated):
 
-        users=CustomUser.objects.order_by('birth_date')[:]
+
+
+
+        users=CustomUser.objects.annotate(
+           birth_date_month=Extract('birth_date', 'month'),
+           birth_date_day=Extract('birth_date', 'day')
+        ).order_by('birth_date_month', 'birth_date_day').all()
+
+
+        #users=CustomUser.objects.order_by(Extract('birth_date','month'))[:]
+        # or this
+        #users=CustomUser.objects.order_by('birth_date')[:]
+
     # ignore the line below
     #   users= CustomUser.objects.extra(select={'birthmonth':'birth_date'},order_by=['birthmonth'])
         context={
@@ -36,17 +52,29 @@ def home(request):
     else:
         return redirect('login')
 
-
-def leaveapplications(request):
-    leaves = Userpost.objects.all()
-    context = {
-        'leaves': leaves
-    }
-    if (request.user.is_authenticated):
-        return render(request, 'dashboard/leaveapplications.html', context=context)
+def new_posts(request):
+    if request.method== 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.author = request.user
+            post.date = timezone.now()
+            post.save()
+            return redirect('dashboard:post_detail',pk= post.pk)
     else:
-        return redirect('login')
+        form = PostForm()
+        return render(request, 'dashboard/post_edit.html', {'form': form})
 
-class userposts(generic.CreateView):
-    form_class = PostForm
-    template_name = 'dashboard/posts.html'
+
+def postdetail(request,pk):
+    post = get_object_or_404(Post,pk=pk)
+    context={
+        'post':post
+    }
+    return render(request,'dashboard/posts.html',context=context)
+
+
+class posts(generic.ListView):
+    template_name = 'dashboard/posets.html'
+    def get_queryset(self):
+        return Post.objects.all()
