@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -30,6 +31,7 @@ def ForgetFormView(request):
         return render(request,'ForgetForm.html')
 def SecurityQuestion(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
+    error_message='Wrong answer. Try again'
     if request.method=="GET":
 
         context={
@@ -39,9 +41,27 @@ def SecurityQuestion(request, pk):
 
     else:
         if(user.answer == request.POST['sec_ans']):
-            return HttpResponse('HEYY')
+            return redirect('users:NewPass', pk=pk)
         else:
-            return HttpResponse('neyyy')
+            context = {
+                'user': user,
+                'error_message': error_message
+            }
+            return render(request, 'SecurityQuestion.html', context=context)
+
+
+def NewPass(request, pk):
+    user = get_object_or_404(CustomUser, pk=pk)
+    if request.POST:
+        if(request.POST['pass1']==request.POST['pass2']):
+            user.set_password(request.POST['pass1'])
+            user.save()
+            return redirect('login')
+        else:
+            return render(request,'NewPass.html',{'error':'Passwords didnt match'})
+
+    else:
+        return render(request,'NewPass.html')
 
 
 

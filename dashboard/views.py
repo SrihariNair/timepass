@@ -45,7 +45,6 @@ def detailview(request,customuser_id):
     }
     return render(request,'dashboard/detailview.html',context=context)
 
-
 def home(request):
     if(request.user.is_authenticated):
         return render(request,'dashboard/home.html')
