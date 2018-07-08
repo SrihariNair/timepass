@@ -18,7 +18,6 @@ class CustomUserCreationForm(UserCreationForm):
             'birth_date' :DatePickerInput(
                 options={
                     'maxDate':str(datetime.datetime.now()),
-                    #this needs width positioning
                 }
             )
         }

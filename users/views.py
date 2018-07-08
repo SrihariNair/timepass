@@ -8,7 +8,7 @@ from django.views.generic.base import View
 from .forms import CustomUserCreationForm
 from .models import CustomUser
 
-
+#todo Password 8 constraint
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
@@ -29,6 +29,8 @@ def ForgetFormView(request):
 
     else:
         return render(request,'ForgetForm.html')
+
+
 def SecurityQuestion(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     error_message='Wrong answer. Try again'
@@ -41,6 +43,9 @@ def SecurityQuestion(request, pk):
 
     else:
         if(user.answer == request.POST['sec_ans']):
+
+            request.session['semaphore']=True
+
             return redirect('users:NewPass', pk=pk)
         else:
             context = {
@@ -51,17 +56,24 @@ def SecurityQuestion(request, pk):
 
 
 def NewPass(request, pk):
-    user = get_object_or_404(CustomUser, pk=pk)
-    if request.POST:
-        if(request.POST['pass1']==request.POST['pass2']):
-            user.set_password(request.POST['pass1'])
-            user.save()
-            return redirect('login')
-        else:
-            return render(request,'NewPass.html',{'error':'Passwords didnt match'})
 
+    semaphore= request.session.get('semaphore')
+    print (semaphore)
+    if (semaphore== None or semaphore==False):
+        return redirect('login')
     else:
-        return render(request,'NewPass.html')
+        request.session['semaphore']=False
+        user = get_object_or_404(CustomUser, pk=pk)
+        if request.POST:
+            if(request.POST['pass1']==request.POST['pass2']):
+                user.set_password(request.POST['pass1'])
+                user.save()
+                return redirect('login')
+            else:
+                return render(request,'NewPass.html',{'error':'Passwords didnt match'})
+
+        else:
+            return render(request,'NewPass.html')
 
 
 

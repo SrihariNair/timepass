@@ -8,25 +8,27 @@
   <h1>Sign up</h1>
     <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-<!--
-    {{ form.as_p }}
--->
         <div class="form">
-            {% if form.errors %}
-          <ul class="errorlist nonfield"><li>Please enter a correct username and password. Note that both fields may be case-sensitive.</li></ul>
-          {% endif %}
             {% for field in form %}
 
             <div class="tag">
                 {{ field.label_tag}}
+
             </div>
             <div class="field">
                 {{ field }}
+                {% if field.help_text %}
+                  <small style="color: grey">{{ field.help_text|safe }}</small><br><br>
+                {% endif %}
+                {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                {% endfor %}
             </div>
             {% endfor %}
           <br>
 
-        <button type="submit">Sign up</button>
+        <button type="submit">Sign up</button><br><br>
+      <a href="{% url 'login' %}">Login Instead?</a><br>
         </div>
     </form>
 </div>

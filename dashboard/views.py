@@ -59,6 +59,7 @@ def new_posts(request):
             post.author = request.user
             post.date = timezone.now()
             post.save()
+
             return redirect('dashboard:post_detail',pk= post.pk)
     else:
         form = PostForm()

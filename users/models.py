@@ -12,14 +12,15 @@ class CustomUser(AbstractUser):
         (M, 'Male'),
         (F, 'Female'),
     )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES,default='M')
 
+    first = 'Whats your pet name'
     SEC_CHOICE =(
-        ('Whats your pet name', 'Whats your pets name'),
+        (first, 'Whats your pets name'),
         ('Whats your best friends name', 'Whats your best frens name'),
         ('How old are you', 'How old are you'),
     )
-    security_question=models.CharField(max_length=200,choices=SEC_CHOICE)
+    security_question=models.CharField(max_length=200,choices=SEC_CHOICE,default=first)
 
     birth_date = models.DateField(("Birth Date"), default=date.today)
 
