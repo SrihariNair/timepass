@@ -80,13 +80,13 @@ class DetailUpdateForm(UpdateView):
     model = CustomUser
     template_name = 'customuser.html'
     fields = ('username', 'email', 'gender','birth_date')
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard:home')
 
 # todo Correct this shit
 class DetailViewForm(UpdateView):
     model = CustomUser
 
-    template_name = 'detailview.html'
+    template_name = 'detail.html'
     fields = ('username', 'email', 'gender','birth_date')
 
 
@@ -94,18 +94,17 @@ class DetailViewForm(UpdateView):
 class DocumentView(UpdateView):
 
     form_class = DocumentListForm
+    model = CustomUser
     template_name = 'documents.html'
-    def get_queryset(self):
-        return CustomUser.objects.all()
+
 
 
 
 class DocumentUpload(UpdateView):
     form_class = DocumentListForm
+    model = CustomUser
     template_name = 'documentupload.html'
-    def get_queryset(self):
-        return CustomUser.objects.all()
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard:home')
 
 
 

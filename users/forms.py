@@ -36,4 +36,4 @@ class CustomUserChangeForm(UserChangeForm):
 class DocumentListForm(forms.ModelForm):
     class Meta:
          model = Documents
-         fields = ('resume')
+         fields = ('resume', 'birth_certificate', 'marksheet',)

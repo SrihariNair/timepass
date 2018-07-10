@@ -10,7 +10,7 @@
   z-index: 1;
   background: #FFFFFF;
   max-width: 440px;
-  margin: 0 auto 100px;
+  margin: 100px auto 100px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -40,6 +40,14 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
+.form select{
+    width:100%;
+    height: 50px;
+    padding:10px;
+}
+
+
 .form button:hover,.form button:active,.form button:focus {
   background: #163549;
 }
