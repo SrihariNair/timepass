@@ -25,7 +25,7 @@ SECRET_KEY = '4^i08j50j=0*3*ii3yf#1n+ugg@!ggfy@s63po(je7w+*rlr@u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.5.102']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'bootstrap3',
     'dashboard',
+    'tinymce',
 ]
 
 MIDDLEWARE = [

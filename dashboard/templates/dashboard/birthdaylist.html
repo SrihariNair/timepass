@@ -9,13 +9,20 @@
   <div id="page-inner">
   <h2>BIRTHDAY LIST</h2>
 <ul>
-    {% for user in users %}
-    <li>
-          <a href="{% url 'dashboard:detailview' user.id %}">
-        {{ user.username }} - {{ user.birth_date }}
-          </a>
-    </li>
-    {% endfor %}
+        {% for keys,values in month.items %}
+           {{ values }}<br>
+            <ul>
+            {% for user in users %}
+                {% if user.birth_date.month == keys %}
+                <li>
+                    <a href="{% url 'dashboard:detailview' user.id %}">
+                        {{ user.username }} - {{ user.birth_date }}
+                    </a><br>
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        {% endfor %}
 </ul>
   </div>
 </div>
@@ -26,7 +33,7 @@
 {% block birthdaylistactive %}
 
 
-<li class="active-link">
+                    <li class="active-link">
                       <a href="{% url 'dashboard:birthday_list' %}"><i class="fa fa-qrcode "></i>Birthday List</a>
                     </li>
 

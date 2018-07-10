@@ -15,23 +15,28 @@ from .models import Post
 def birthdaylist(request):
     if(request.user.is_authenticated):
 
-
-
-
         users=CustomUser.objects.annotate(
            birth_date_month=Extract('birth_date', 'month'),
            birth_date_day=Extract('birth_date', 'day')
         ).order_by('birth_date_month', 'birth_date_day').all()
 
-
-        #users=CustomUser.objects.order_by(Extract('birth_date','month'))[:]
-        # or this
-        #users=CustomUser.objects.order_by('birth_date')[:]
-
-    # ignore the line below
-    #   users= CustomUser.objects.extra(select={'birthmonth':'birth_date'},order_by=['birthmonth'])
+        Months={
+            1:'January',
+            2: 'February',
+            3:'March',
+            4: 'April',
+            5: 'May',
+            6: 'June',
+            7: 'July',
+            8: 'August',
+            9: 'September',
+            10: 'October',
+            11: 'November',
+            12: 'December',
+        }
         context={
-            'users':users
+            'users':users,
+            'month':Months
         }
         return render(request,'dashboard/birthdaylist.html',context=context)
     else:
@@ -41,7 +46,7 @@ def birthdaylist(request):
 def detailview(request,customuser_id):
     users=get_object_or_404(CustomUser,pk=customuser_id)
     context={
-        'users':users
+        'users':users,
     }
     return render(request,'dashboard/detailview.html',context=context)
 
@@ -63,7 +68,7 @@ def new_posts(request):
             return redirect('dashboard:post_detail',pk= post.pk)
     else:
         form = PostForm()
-        return render(request, 'dashboard/post_edit.html', {'form': form})
+        return render(request, 'dashboard/new_post.html', {'form': form})
 
 
 def postdetail(request,pk):
@@ -71,10 +76,10 @@ def postdetail(request,pk):
     context={
         'post':post
     }
-    return render(request,'dashboard/posts.html',context=context)
+    return render(request,'dashboard/postdetail.html',context=context)
 
 
-class posts(generic.ListView):
-    template_name = 'dashboard/posets.html'
+class PostList(generic.ListView):
+    template_name = 'dashboard/postlist.html'
     def get_queryset(self):
-        return Post.objects.all()
+        return Post.objects.order_by('-date').all()

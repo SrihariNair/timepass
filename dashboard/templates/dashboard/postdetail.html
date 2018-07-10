@@ -1,0 +1,25 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Posts Detail{% endblock %}
+
+{% block mainpage %}
+<div id="page-wrapper">
+  <div id="page-inner">
+      <h2>
+          {{ post.title }}
+      </h2>
+
+{{ post.text|urlize }}
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block postactive %}
+                    <li class="active-link">
+                      <a href="{% url 'dashboard:posts' %}"><i class="fa fa-qrcode "></i>Post</a>
+                    </li>
+{% endblock %}

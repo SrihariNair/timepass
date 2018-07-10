@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import UpdateView
 from django.views.generic.base import View
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, DocumentListForm
 from .models import CustomUser
 
 #todo Password 8 constraint
@@ -75,7 +76,36 @@ def NewPass(request, pk):
         else:
             return render(request,'NewPass.html')
 
+class DetailUpdateForm(UpdateView):
+    model = CustomUser
+    template_name = 'customuser.html'
+    fields = ('username', 'email', 'gender','birth_date')
+    success_url = reverse_lazy('home')
 
+# todo Correct this shit
+class DetailViewForm(UpdateView):
+    model = CustomUser
+
+    template_name = 'detailview.html'
+    fields = ('username', 'email', 'gender','birth_date')
+
+
+# todo correct this shiit too
+class DocumentView(UpdateView):
+
+    form_class = DocumentListForm
+    template_name = 'documents.html'
+    def get_queryset(self):
+        return CustomUser.objects.all()
+
+
+
+class DocumentUpload(UpdateView):
+    form_class = DocumentListForm
+    template_name = 'documentupload.html'
+    def get_queryset(self):
+        return CustomUser.objects.all()
+    success_url = reverse_lazy('home')
 
 
 

@@ -1,0 +1,31 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Posts List{% endblock %}
+
+{% block mainpage %}
+
+<div id="page-wrapper">
+  <div id="page-inner">
+      <br>
+      <a href="{% url 'dashboard:new_posts' %}">New Post</a>
+      <h2>
+          Posts List
+      </h2>
+
+<ul>
+    {% for post in object_list %}
+        <li>
+            <a href="{% url 'dashboard:post_detail' post.pk %} ">{{post.title}}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block postactive %}
+                    <li class="active-link">
+                      <a href="{% url 'dashboard:posts' %}"><i class="fa fa-qrcode "></i>Post</a>
+                    </li>
+{% endblock %}
