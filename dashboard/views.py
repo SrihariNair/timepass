@@ -83,3 +83,29 @@ class PostList(generic.ListView):
     template_name = 'dashboard/postlist.html'
     def get_queryset(self):
         return Post.objects.order_by('-date').all()
+
+
+
+
+def approval(request):
+    leaves = request.user.leaveapplication_set.all().order_by('-created_date')
+    context = {
+        'leaves': leaves,
+    }
+    if (request.user.is_authenticated):
+        return render(request, 'dashboard/approval.html', context=context)
+    else:
+        return redirect('home')
+
+
+def applyleave(request):
+    if request.method== 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid:
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('dashboard:approval')
+    else:
+        form = PostForm()
+        return render(request, 'dashboard/applyleave.html', {'form': form})

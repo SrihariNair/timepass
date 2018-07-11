@@ -1,0 +1,38 @@
+{% extends 'dashboard/sidebar.html' %}
+
+{% block title %}Posts{% endblock %}
+
+
+{% block mainpage %}
+
+<div id="page-wrapper">
+  <div id="page-inner">
+  <h2>Check Approval</h2>
+    {% for obj in leaves %}
+    <br>
+    <h4>{{obj.author}}</h4>
+      <br>
+    {{obj.subject}}
+    <br>
+    {{obj.text}}
+    <br>
+    {{obj.from_date}} --> {{obj.to_date}}
+    <br>
+    {{obj.approval}}
+    <br>
+    ----------------------------------------------------------
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block approval %}
+
+
+<li class="active-link">
+                      <a href="{% url 'dashboard:approval' %}"><i class="fa fa-qrcode "></i>Leave Approval</a>
+                    </li>
+
+{% endblock %}

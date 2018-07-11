@@ -7,20 +7,25 @@
 <div id="page-wrapper">
   <div id="page-inner">
       <br>
-      <a href="{% url 'dashboard:new_posts' %}">New Post</a>
+
+      <a href="{% url 'dashboard:new_posts' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Post</button></a>
       <h2>
           Posts List
       </h2>
-
 <ul>
     {% for post in object_list %}
-        <li>
-            <a href="{% url 'dashboard:post_detail' post.pk %} ">{{post.title}}</a>
-        </li>
+
+    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity">{{post.date}}</span>
+        <h4>{{ post.author.username }}</h4><br>
+        <hr class="w3-clear">
+        <p>{{ post.text|urlize }}</p>
+      </div>
+
     {% endfor %}
 </ul>
-
-  </div>
+</div>
 </div>
 {% endblock %}
 

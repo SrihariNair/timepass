@@ -10,4 +10,6 @@ urlpatterns = [
     path('new_post/',views.new_posts,name='new_posts'),
     path('posts/',views.PostList.as_view(),name='posts'),
     path('posts_details/<int:pk>',views.postdetail,name='post_detail'),
+    path('approval/', views.approval, name='approval'),
+    path('applyleave/', views.applyleave, name='applyleave'),
 ]

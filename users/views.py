@@ -83,7 +83,7 @@ class DetailUpdateForm(UpdateView):
     success_url = reverse_lazy('dashboard:home')
 
 # todo Correct this shit
-class DetailViewForm(UpdateView):
+class DetailViewForm(generic.DetailView):
     model = CustomUser
 
     template_name = 'detail.html'

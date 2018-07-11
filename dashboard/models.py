@@ -15,3 +15,21 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+class LeaveApplication(models.Model):
+    subject = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    from_date = models.DateField(default=timezone.now)
+    to_date = models.DateField(default=timezone.now)
+    APPROVE_CHOICE = (
+        ('APPROVED', 'APPROVED'),
+        ('NOT APPROVED', 'NOT APPROVED'),
+    )
+    approval = models.CharField(blank=True, max_length=100, choices=APPROVE_CHOICE)
+    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+
+    def _str_(self):
+        return str(self.subject)
