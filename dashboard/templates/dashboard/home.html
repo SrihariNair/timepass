@@ -4,9 +4,28 @@ Home
 {% endblock %}
 {% block mainpage %}
 {% if user.is_authenticated %}
+
+
 <div id="page-wrapper">
   <div id="page-inner">
-  <h3>Hey {{ user.username }}!</h3>
+      <hr>
+      <h2>
+          Announcements
+      </h2>
+      <hr>
+   <ul>
+    {% for announcement in announcements %}
+
+    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <span class="w3-right w3-opacity">{{announcement.date}}</span>
+        <h4>{{ announcement.author.username }}</h4><br>
+        <span class="w3-right w3-opacity">{{announcement.author.username}}</span>
+        <hr class="w3-clear">
+        <p>{{ announcement.text|urlize }}</p>
+      </div>
+
+    {% endfor %}
+</ul>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a> |
@@ -23,3 +42,7 @@ Home
                         <a href="{% url 'dashboard:home' %}" ><i class="fa fa-home "></i>Home</a>
                     </li>
                     {% endblock %}
+
+
+
+

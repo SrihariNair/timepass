@@ -9,7 +9,7 @@ from .forms import PostForm
 
 from users.models import CustomUser
 
-from .models import Post
+from .models import Post, Announcement
 
 
 def birthdaylist(request):
@@ -43,16 +43,23 @@ def birthdaylist(request):
         return redirect('login')
 
 
-def detailview(request,customuser_id):
-    users=get_object_or_404(CustomUser,pk=customuser_id)
-    context={
-        'users':users,
-    }
-    return render(request,'dashboard/detailview.html',context=context)
+class detailview(generic.DetailView):
+    model = CustomUser
+    template_name = "dashboard/detailview.html"
+
+def detailview(request):
+    if request.user.is_authenticated:
+            return render(request,'dashboard/detailview.html')
+    else:
+        return redirect('login')
 
 def home(request):
+    announces = Announcement.objects.order_by('-date').all()
     if(request.user.is_authenticated):
-        return render(request,'dashboard/home.html')
+        context={
+            'announcements' : announces,
+        }
+        return render(request,'dashboard/home.html',context=context)
     else:
         return redirect('login')
 
@@ -109,3 +116,6 @@ def applyleave(request):
     else:
         form = PostForm()
         return render(request, 'dashboard/applyleave.html', {'form': form})
+
+
+

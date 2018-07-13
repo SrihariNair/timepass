@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from tinymce.models import HTMLField
 
 from users.models import CustomUser
 
@@ -14,7 +15,7 @@ class Post(models.Model):
             default=timezone.now)
 
     def __str__(self):
-        return self.title
+        return str(self.title)+"-"+str(self.author)
 
 
 
@@ -32,4 +33,16 @@ class LeaveApplication(models.Model):
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
 
     def _str_(self):
-        return str(self.subject)
+        return self.subject
+
+
+
+class Announcement(models.Model):
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    text = models.TextField()
+    date = models.DateTimeField(
+            default=timezone.now)
+
+    def __str__(self):
+        return self.title

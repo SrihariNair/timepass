@@ -6,14 +6,14 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
-from .models import CustomUser, Documents
+from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         now = datetime.datetime.now()
-        fields = ('username', 'email', 'gender', 'security_question', 'answer', 'birth_date')
+        fields = ('username', 'email', 'gender', 'security_question', 'answer', 'birth_date', 'image')
         widgets={
             'birth_date' :DatePickerInput(
                 options={
@@ -27,13 +27,6 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
-
     class Meta:
         model = CustomUser
         fields = UserChangeForm.Meta.fields
-
-
-class DocumentListForm(forms.ModelForm):
-    class Meta:
-         model = Documents
-         fields = ('resume', 'birth_certificate', 'marksheet',)

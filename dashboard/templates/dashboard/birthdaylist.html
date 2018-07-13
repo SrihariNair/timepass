@@ -29,11 +29,7 @@
 
             {% for user in users %}
                 {% if user.birth_date.month == keys %}
-
-                    <a href="{% url 'dashboard:detailview' user.id %}">
-                        {{ user.username }} - {{ user.birth_date }}
-                    </a><br>
-
+                        <h5>{{ user.username }} - {{ user.birth_date }}</h5>
                 {% endif %}
             {% endfor %}
                     </div>

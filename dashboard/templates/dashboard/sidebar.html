@@ -11,12 +11,12 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{% url 'dashboard:home' %}">
-                        <img src="{% static 'img/canva-photo-editor.png' %}">
+                        <img src="{% static 'img/finallogo.png' %}">
                     </a>
                 </div>
                  <span class="logout-spn" >
 
-                  <a href="{% url 'logout' %}" style="color:#fff;">LOGOUT</a>
+                  <a href="{% url 'dashboard:detailview'%}" style="color:#fff;">Hey {{ user.username }}</a>
 
                 </span>
             </div>
@@ -34,7 +34,7 @@
 
                     {% block profileactive %}
                     <li>
-                        <a href="{% url 'dashboard:detailview' user.id %}"><i class="fa fa-user "></i>Profile</a>
+                        <a href="{% url 'dashboard:detailview'%}"><i class="fa fa-user "></i>Profile</a>
                     </li>
                     {% endblock %}
 

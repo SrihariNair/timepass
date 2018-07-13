@@ -6,12 +6,15 @@
 
 <div id="page-wrapper">
   <div id="page-inner">
-      <br>
 
-      <a href="{% url 'dashboard:new_posts' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Post</button></a>
+
+      <hr>
       <h2>
           Posts List
       </h2>
+      <hr>
+            <a href="{% url 'dashboard:new_posts' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Post</button></a>
+<br>
 <ul>
     {% for post in object_list %}
 
@@ -20,6 +23,7 @@
         <span class="w3-right w3-opacity">{{post.date}}</span>
         <h4>{{ post.author.username }}</h4><br>
         <hr class="w3-clear">
+
         <p>{{ post.text|urlize }}</p>
       </div>
 

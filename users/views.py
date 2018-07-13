@@ -6,7 +6,7 @@ from django.views import generic
 from django.views.generic import UpdateView
 from django.views.generic.base import View
 
-from .forms import CustomUserCreationForm, DocumentListForm
+from .forms import CustomUserCreationForm
 from .models import CustomUser
 
 #todo Password 8 constraint
@@ -75,36 +75,6 @@ def NewPass(request, pk):
 
         else:
             return render(request,'NewPass.html')
-
-class DetailUpdateForm(UpdateView):
-    model = CustomUser
-    template_name = 'customuser.html'
-    fields = ('username', 'email', 'gender','birth_date')
-    success_url = reverse_lazy('dashboard:home')
-
-# todo Correct this shit
-class DetailViewForm(generic.DetailView):
-    model = CustomUser
-
-    template_name = 'detail.html'
-    fields = ('username', 'email', 'gender','birth_date')
-
-
-# todo correct this shiit too
-class DocumentView(UpdateView):
-
-    form_class = DocumentListForm
-    model = CustomUser
-    template_name = 'documents.html'
-
-
-
-
-class DocumentUpload(UpdateView):
-    form_class = DocumentListForm
-    model = CustomUser
-    template_name = 'documentupload.html'
-    success_url = reverse_lazy('dashboard:home')
 
 
 

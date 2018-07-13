@@ -5,14 +5,34 @@
 {% block mainpage %}
 <div id="page-wrapper" >
             <div id="page-inner">
-                <h1>HI {{users.username}}</h1>
-                <h1>this is ur profile view</h1>
+                <hr>
+                <h2>Profile:</h2>
+                <hr>
+                <a href="{% url 'dashboard:edit' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Post</button></a>
+                <br>
+                <br>
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr>
+                            <td>Username</td>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{user.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Life</td>
+                            <td>Sucks</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 </div>
 {% endblock %}
 
 {% block profileactive %}
                     <li class="active-link">
-                        <a href="{% url 'dashboard:detailview' user.id %}"><i class="fa fa-user "></i>Profile</a>
+                        <a href="{% url 'dashboard:detailview'%}"><i class="fa fa-user "></i>Profile</a>
                     </li>
-                    {% endblock %}
+{% endblock %}
