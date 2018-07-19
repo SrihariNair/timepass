@@ -1,6 +1,6 @@
 {% extends 'dashboard/sidebar.html' %}
 
-{% block title %}Detail View{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block mainpage %}
 <div id="page-wrapper" >
@@ -8,9 +8,6 @@
                 <hr>
                 <h2>Profile:</h2>
                 <hr>
-                <a href="{% url 'dashboard:edit' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Post</button></a>
-                <br>
-                <br>
                 <table class="table table-hover table-striped">
                     <tbody>
                         <tr>
@@ -33,6 +30,6 @@
 
 {% block profileactive %}
                     <li class="active-link">
-                        <a href="{% url 'dashboard:detailview'%}"><i class="fa fa-user "></i>Profile</a>
+                        <a href="{% url 'dashboard:profile'%}"><i class="fa fa-user "></i>Profile</a>
                     </li>
 {% endblock %}

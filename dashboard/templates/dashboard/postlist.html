@@ -1,13 +1,11 @@
 {% extends 'dashboard/sidebar.html' %}
 
-{% block title %}Posts List{% endblock %}
-
+{% block title %}Posts{% endblock %}
+{%load staticfiles%}
 {% block mainpage %}
 
 <div id="page-wrapper">
   <div id="page-inner">
-
-
       <hr>
       <h2>
           Posts List
@@ -19,22 +17,43 @@
     {% for post in object_list %}
 
     <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">{{post.date}}</span>
-        <h4>{{ post.author.username }}</h4><br>
-        <hr class="w3-clear">
-
+        <span class="w3-right w3-opacity">{{post.date}}<br>{{post.author.username}}
+            {% if post.author == user %}
+            <a href="{% url 'dashboard:delete' post.id %}" class="btn btn-danger btn-sm">
+                <i class="fa fa-trash" aria-hidden="true" style="color: black"></i>
+                Delete
+            </a>
+            {% endif %}
+        </span>
+        <h4>{{ post.title }}</h4>
+<br>
+        <hr>
         <p>{{ post.text|urlize }}</p>
       </div>
 
     {% endfor %}
 </ul>
+<span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+      </span><br>
+
+
+  {% if object_list.has_previous %}
+    <a href="?page=1">First</a>
+    <span class="prevarrow"><a href="?page={{ object_list.previous_page_number }}" class="previous round">&#8249;</a></span>
+  {% endif %}
+
+      {% if object_list.has_next %}
+      <span class="nextarrow"><a href="?page={{ object_list.next_page_number }}" class="next round">&#8250;</a></span>
+      <a href="?page={{ object_list.paginator.num_pages }}">Last </a>
+
+      {% endif %}
 </div>
 </div>
 {% endblock %}
 
 {% block postactive %}
                     <li class="active-link">
-                      <a href="{% url 'dashboard:posts' %}"><i class="fa fa-qrcode "></i>Post</a>
+                      <a href="{% url 'dashboard:posts' %}"><i class="fas fa-bars "></i>Post</a>
                     </li>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'dashboard/sidebar.html' %}
 
-{% block title %}Leaves{% endblock %}
+{% block title %}Announcements{% endblock %}
 
 {% block calendar %}
   {% load bootstrap3 %}       {# import bootstrap4/bootstrap3 #}
@@ -17,19 +17,13 @@
 
 <div id="page-wrapper">
   <div id="page-inner">
-  <h2>Leave Application</h2>
-    <form method="post">
+  <h2>Announcement Apply</h2>
+    <form method="post" enctype="multipart/form-data" action="">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">Post</button>
+    </form>
   </div>
 </div>
 
 {% endblock %}
-
-
-{% block approval %}
-                    <li class="active-link">
-                        <a href="{% url 'dashboard:approval' %}"><i class="fa fa-edit "></i>Leaves </a>
-                    </li>
-                    {% endblock %}

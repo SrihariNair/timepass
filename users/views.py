@@ -1,5 +1,4 @@
 from django.contrib.auth import login
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
@@ -9,7 +8,7 @@ from django.views.generic.base import View
 from .forms import CustomUserCreationForm
 from .models import CustomUser
 
-#todo Password 8 constraint
+
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
@@ -75,6 +74,8 @@ def NewPass(request, pk):
 
         else:
             return render(request,'NewPass.html')
+
+
 
 
 

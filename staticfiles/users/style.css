@@ -118,3 +118,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.nextarrow{
+font-size: 40px;
+color: black;
+text-decoration: none;
+display: inline-block;
+padding: 8px 16px 16px 16px;
+border-radius: 50%;
+background-color: lightblue;
+color: white;
+}
+.prevarrow{
+font-size: 40px;
+color: black;
+text-decoration: none;
+display: inline-block;
+padding: 8px 16px 16px 16px;
+border-radius: 50%;
+background-color: lightblue;
+color: white;
+}

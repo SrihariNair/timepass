@@ -1,38 +1,40 @@
 {% extends 'dashboard/sidebar.html' %}
 
-{% block title %}Posts{% endblock %}
-
+{% block title %}Leaves{% endblock %}
 
 {% block mainpage %}
 
 <div id="page-wrapper">
   <div id="page-inner">
-  <h2>Check Approval</h2>
-    {% for obj in leaves %}
-    <br>
-    <h4>{{obj.author}}</h4>
       <br>
-    {{obj.subject}}
-    <br>
-    {{obj.text}}
-    <br>
-    {{obj.from_date}} --> {{obj.to_date}}
-    <br>
-    {{obj.approval}}
-    <br>
-    ----------------------------------------------------------
-    {% endfor %}
-  </div>
-</div>
 
+      <a href="{% url 'dashboard:applyleave' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Leave</button></a>
+      <h2>
+          Leaves
+      </h2>
+<ul>
+ {% for post in leaves %}
+    <div class="w3-container w3-card w3-white w3-round w3-margin">
+        <span class="w3-right w3-opacity">{{post.date}}</span>
+        <h4>{{ post.reasons }}</h4><br>
+        <h4>{{ post.subject }}</h4><br>
+        <h4>{{ post.text }}</h4><br>
+        <h4>{{ post.from_date }} - {{post.to_date}}</h4><br>
+        <h4>{{ post.approval }}</h4>
+
+      </div>
+
+    {% endfor %}
+</ul>
+</div>
+</div>
 {% endblock %}
+
+
 
 
 {% block approval %}
-
-
-<li class="active-link">
-                      <a href="{% url 'dashboard:approval' %}"><i class="fa fa-qrcode "></i>Leave Approval</a>
+                    <li class="active-link">
+                        <a href="{% url 'dashboard:approval' %}"><i class="fa fa-edit "></i>Leaves </a>
                     </li>
-
-{% endblock %}
+                    {% endblock %}

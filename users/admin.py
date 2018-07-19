@@ -15,3 +15,6 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(CustomUser, admin_class=CustomUserAdmin)
+
+admin.site.site_header="Cateina Admin"
+admin.site.site_title="Cateina Admin"

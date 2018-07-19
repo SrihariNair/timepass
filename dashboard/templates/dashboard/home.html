@@ -4,22 +4,33 @@ Home
 {% endblock %}
 {% block mainpage %}
 {% if user.is_authenticated %}
-
-
 <div id="page-wrapper">
   <div id="page-inner">
       <hr>
       <h2>
-          Announcements
+          {% for docs in doc %}
+          <a href="{{docs.file.url}}">Holiday List</a>
+          {% endfor %}
       </h2>
       <hr>
+
+      <hr>
+      <h2>
+          Announcements
+
+      </h2>
+      <hr>
+      {% if user.is_superuser %}
+       <a href="{% url 'dashboard:announcements' %}"><button class="w3-right" type="button"><i class="fa fa-plus"></i>  New Announcement</button></a>
+      {% endif %}
+      <br>
+
    <ul>
     {% for announcement in announcements %}
 
     <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">{{announcement.date}}</span>
-        <h4>{{ announcement.author.username }}</h4><br>
-        <span class="w3-right w3-opacity">{{announcement.author.username}}</span>
+        <span class="w3-right w3-opacity">{{announcement.date}}<br>{{announcement.author.username}}</span>
+        <h4>{{ announcement.title }}</h4><br>
         <hr class="w3-clear">
         <p>{{ announcement.text|urlize }}</p>
       </div>
@@ -42,7 +53,3 @@ Home
                         <a href="{% url 'dashboard:home' %}" ><i class="fa fa-home "></i>Home</a>
                     </li>
                     {% endblock %}
-
-
-
-

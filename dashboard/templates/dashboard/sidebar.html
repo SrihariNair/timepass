@@ -16,7 +16,7 @@
                 </div>
                  <span class="logout-spn" >
 
-                  <a href="{% url 'dashboard:detailview'%}" style="color:#fff;">Hey {{ user.username }}</a>
+                  <a href="{% url 'dashboard:profile'%}" style="color:#fff;">Hey {{ user.username }}</a>
 
                 </span>
             </div>
@@ -34,32 +34,32 @@
 
                     {% block profileactive %}
                     <li>
-                        <a href="{% url 'dashboard:detailview'%}"><i class="fa fa-user "></i>Profile</a>
+                        <a href="{% url 'dashboard:profile'%}"><i class="fa fa-user "></i>Profile</a>
                     </li>
                     {% endblock %}
 
                     {% block postactive %}
                     <li >
-                        <a href="{% url 'dashboard:posts' %}"><i class="fa fa-edit "></i>Post</a>
+                        <a href="{% url 'dashboard:posts' %}"><i class="fas fa-bars "></i>Post</a>
                     </li>
                     {% endblock %}
-                    {% block applyactive %}
-                    <li >
-                        <a href="{% url 'dashboard:applyleave' %}"><i class="fa fa-edit "></i>Leave Application</a>
-                    </li>
-                    {% endblock %}
-
                     {% block approval %}
                     <li>
-                        <a href="{% url 'dashboard:approval' %}"><i class="fa fa-edit "></i>Leave Approval </a>
+                        <a href="{% url 'dashboard:approval' %}"><i class="fa fa-edit "></i>Leaves </a>
+                    </li>
+                    {% endblock %}
+                    {% block birthdaylistactive %}
+                 <li>
+                      <a href="{% url 'dashboard:birthday_list' %}"><i class="fas fa-birthday-cake "></i>Birthday List</a>
+                    </li>
+                    {% endblock %}
+                    {% block approveexpense %}
+                    <li>
+                        <a href="{% url 'dashboard:expenseapproval' %}"><i class="fa fa-edit "></i>Expenses </a>
                     </li>
                     {% endblock %}
 
-                    {% block birthdaylistactive %}
-                 <li>
-                      <a href="{% url 'dashboard:birthday_list' %}"><i class="fa fa-square "></i>Birthday List</a>
-                    </li>
-                    {% endblock %}
+
                     <li>
                         <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i>Logout </a>
                     </li>
