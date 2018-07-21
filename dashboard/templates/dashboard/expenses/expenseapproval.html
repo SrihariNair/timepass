@@ -14,7 +14,10 @@
 <ul>
  {% for post in expenses %}
     <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">{{post.date}}</span>
+        <span class="w3-right w3-opacity">{{post.date}}<a href="{% url 'dashboard:delete' post.id %}" class="btn btn-danger btn-sm">
+                <i class="fa fa-trash" aria-hidden="true" style="color: black"></i>
+                Delete
+            </a></span>
         <h4>{{ post.author }}</h4><br>
         <h4>{{ post.subject }}</h4><br>
         <h4>{{ post.text }}</h4><br>

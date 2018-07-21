@@ -8,12 +8,16 @@
                 <hr>
                 <h2>Profile:</h2>
                 <hr>
+                 <a href="{% url 'dashboard:new_posts' %}"><button class="w3-right" type="button"><i class="fa fa-edit"></i>    Edit    </button></a>
+<br><br>
                 <table class="table table-hover table-striped">
                     <tbody>
+
                         <tr>
                             <td>Username</td>
                             <td>{{ user.username }}</td>
                         </tr>
+
                         <tr>
                             <td>Email</td>
                             <td>{{user.email}}</td>

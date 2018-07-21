@@ -40,11 +40,11 @@
 
   {% if object_list.has_previous %}
     <a href="?page=1">First</a>
-    <span class="prevarrow"><a href="?page={{ object_list.previous_page_number }}" class="previous round">&#8249;</a></span>
+      <a href="?page={{ object_list.previous_page_number }}" class="previous round"><span class="prevarrow">&#8249;</span></a>
   {% endif %}
 
       {% if object_list.has_next %}
-      <span class="nextarrow"><a href="?page={{ object_list.next_page_number }}" class="next round">&#8250;</a></span>
+      <a href="?page={{ object_list.next_page_number }}" class="next round"><span class="nextarrow">&#8250;</span></a>
       <a href="?page={{ object_list.paginator.num_pages }}">Last </a>
 
       {% endif %}
