@@ -3,16 +3,10 @@
 Home
 {% endblock %}
 {% block mainpage %}
-{% if user.is_authenticated %}
+
 <div id="page-wrapper">
   <div id="page-inner">
-      <hr>
-      <h2>
-          {% for docs in doc %}
-          <a href="{{docs.file.url}}">Holiday List</a>
-          {% endfor %}
-      </h2>
-      <hr>
+
 
       <hr>
       <h2>
@@ -29,19 +23,33 @@ Home
     {% for announcement in announcements %}
 
     <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">{{announcement.date}}<br>{{announcement.author.username}}</span>
+        <span class="w3-right w3-opacity">{{announcement.created_date}}<br>{{announcement.author.name}}</span>
         <h4>{{ announcement.title }}</h4><br>
         <hr class="w3-clear">
         <p>{{ announcement.text|urlize }}</p>
       </div>
 
+
+
+
     {% endfor %}
 </ul>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a> |
-  <a href="{% url 'users:signup' %}">signup</a>
-{% endif %}
+      <span class="current">
+            Page {{ announcements.number }} of {{ announcements.paginator.num_pages }}
+      </span><br>
+
+
+  {% if announcements.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ announcements.previous_page_number }}" class="previous round"><span class="prevarrow">&#8249;</span></a>
+  {% endif %}
+
+      {% if announcements.has_next %}
+      <a href="?page={{ announcements.next_page_number }}" class="next round"><span class="nextarrow">&#8250;</span></a>
+      <a href="?page={{ announcements.paginator.num_pages }}">Last </a>
+
+      {% endif %}
+
   </div>
 </div>
 

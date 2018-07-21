@@ -24,7 +24,7 @@ class LeaveForm(forms.ModelForm):
 class ExpenseForm(forms.ModelForm):
     class Meta:
         model = ExpenseApplication
-        fields = ('subject', 'text', 'date', 'file')
+        fields = ('subject', 'text', 'date','amount' ,'file')
         widgets = {'text': forms.Textarea(attrs={'rows': 5, 'cols': 100, 'style': 'resize:none;'}),
                    'date': DatePickerInput(),
                    }
@@ -32,7 +32,7 @@ class ExpenseForm(forms.ModelForm):
 class AnnouncementForm(forms.ModelForm):
     class Meta:
         model = Announcement
-        fields = ('title', 'text', 'date')
+        fields = ('title', 'text')
         widgets = {'text': forms.Textarea(attrs={'rows': 5, 'cols': 100, 'style': 'resize:none;'}),
-                   'date': DatePickerInput(),
+
                    }

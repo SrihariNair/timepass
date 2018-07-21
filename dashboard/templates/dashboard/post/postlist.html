@@ -17,7 +17,7 @@
     {% for post in object_list %}
 
     <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">{{post.date}}<br>{{post.author.username}}
+        <span class="w3-right w3-opacity">{{post.date}}<br>{{post.author.name}}
             {% if post.author == user %}
             <a href="{% url 'dashboard:delete' post.id %}" class="btn btn-danger btn-sm">
                 <i class="fa fa-trash" aria-hidden="true" style="color: black"></i>
@@ -28,7 +28,7 @@
         <h4>{{ post.title }}</h4>
 <br>
         <hr>
-        <p>{{ post.text|urlize }}</p>
+        <p>{{ post.text|urlize|linebreaks}}</p>
       </div>
 
     {% endfor %}

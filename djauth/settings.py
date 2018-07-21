@@ -25,7 +25,7 @@ SECRET_KEY = '4^i08j50j=0*3*ii3yf#1n+ugg@!ggfy@s63po(je7w+*rlr@u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.5.102','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.5.108','127.0.0.1']
 
 
 # Application definition
@@ -120,13 +120,15 @@ BOOTSTRAP3 = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+TIME_ZONE = 'Asia/Kolkata'
+
 
 
 # Static files (CSS, JavaScript, Images)

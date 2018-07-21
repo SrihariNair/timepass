@@ -28,7 +28,17 @@ class CustomUser(AbstractUser):
 
     answer = models.CharField(max_length=255,help_text="<ul><li>Security Answer are case sensitive</li><li>They can be used to recover your password.</li></ul>")
 
-    image = models.FileField(blank=True)
+    resume = models.FileField(blank=True)
+
+    contact_number = models.CharField(max_length=14,blank=True)
+
+    blood_group = models.CharField(max_length=20,blank=True)
+
+    emergency_contact_name = models.CharField(max_length=255,blank=True)
+
+    emergency_contact_number = models.CharField(max_length=14,blank=True)
+
+    address = models.TextField(blank=True)
 
     def __str__(self):
-        return self.username
+        return str(self.username)

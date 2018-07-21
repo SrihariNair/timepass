@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
@@ -56,24 +57,49 @@ def SecurityQuestion(request, pk):
 
 
 def NewPass(request, pk):
-
+    '''
+    print ("entering newpass")
     semaphore= request.session.get('semaphore')
     print (semaphore)
     if (semaphore== None or semaphore==False):
+
         return redirect('login')
     else:
         request.session['semaphore']=False
         user = get_object_or_404(CustomUser, pk=pk)
-        if request.POST:
+        if request.method=='POST':
+            print("req == post")
             if(request.POST['pass1']==request.POST['pass2']):
                 user.set_password(request.POST['pass1'])
                 user.save()
-                return redirect('login')
+                print('User saved')
+                return HttpResponse("hello")
             else:
                 return render(request,'NewPass.html',{'error':'Passwords didnt match'})
 
         else:
+            print("rendering newpass")
             return render(request,'NewPass.html')
+            '''
+    if request.method=="GET":
+        semaphore = request.session.get('semaphore')
+        if (semaphore == None or semaphore == False):
+            return redirect('login')
+        else:
+            print("rendering newpass")
+            return render(request,'NewPass.html')
+
+    else:
+        request.session['semaphore'] = False
+        user = get_object_or_404(CustomUser, pk=pk)
+        if (request.POST['pass1'] == request.POST['pass2']):
+            user.set_password(request.POST['pass1'])
+            user.save()
+            print('User saved')
+            return HttpResponse("hello")
+        else:
+            return render(request, 'NewPass.html', {'error': 'Passwords didnt match'})
+
 
 
 

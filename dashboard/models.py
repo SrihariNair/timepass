@@ -21,39 +21,41 @@ class Post(models.Model):
 
 
 class LeaveApplication(models.Model):
-    subject = models.CharField(max_length=200)
-    text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    from_date = models.DateField(default=timezone.now)
-    to_date = models.DateField(default=timezone.now)
     APPROVE_CHOICE1 = (
         ('SICK LEAVE', 'SICK LEAVE'),
         ('PERSONAL LEAVE', 'PERSONAL LEAVE'),
         ('SABBATICAL LEAVE', 'SABBATICAL LEAVE'),
         ('MATERNITY LEAVE', 'MATERNITY LEAVE'),
     )
-    reasons = models.CharField(blank=True, max_length=100, choices=APPROVE_CHOICE1)
+
     APPROVE_CHOICE = (
+        ('APPROVAL PENDING', 'APPROVAL PENDING'),
         ('APPROVED', 'APPROVED'),
         ('NOT APPROVED', 'NOT APPROVED'),
     )
-    approval = models.CharField(blank=True, max_length=100, choices=APPROVE_CHOICE)
+    reasons = models.CharField(blank=True, max_length=100, choices=APPROVE_CHOICE1)
+
+    subject = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    from_date = models.DateField(default=timezone.now)
+    to_date = models.DateField(default=timezone.now)
+
+    approval = models.CharField(blank=True, max_length=100, choices=APPROVE_CHOICE,default='APPROVAL PENDING')
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.author
+        return str(self.author)
 
 
 class Announcement(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     text = models.TextField()
-    date = models.DateTimeField(
-        default=timezone.now)
     created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.author
+        return str(self.author)
 
 class ExpenseApplication(models.Model):
     subject = models.CharField(max_length=200)
@@ -62,12 +64,13 @@ class ExpenseApplication(models.Model):
     date = models.DateField(default=timezone.now)
     file=models.FileField()
     APPROVE_CHOICE = (
+        ('APPROVAL PENDING','APPROVAL PENDING'),
         ('APPROVED', 'APPROVED'),
         ('NOT APPROVED', 'NOT APPROVED'),
     )
-    approval = models.CharField(blank=True, max_length=100, choices=APPROVE_CHOICE)
+    approval = models.CharField(blank=True,default='APPROVAL PENDING' ,max_length=100, choices=APPROVE_CHOICE)
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-
+    amount = models.CharField(blank=True,max_length=255)
     def __str__(self):
             return str(self.author)
 

@@ -58,6 +58,11 @@
                         <a href="{% url 'dashboard:expenseapproval' %}"><i class="fa fa-edit "></i>Expenses </a>
                     </li>
                     {% endblock %}
+                    {% block documents %}
+                    <li>
+                        <a href="{% url 'dashboard:documents' %}"><i class="fas fa-file-alt"></i>Documents</a>
+                    </li>
+                    {% endblock %}
 
 
                     <li>
@@ -91,7 +96,7 @@
 
              <div class="row">
                 <div class="col-lg-12" >
-                    Footer goes here
+                    2018 &copy; CATEINA TECHNOLOGIES PVT. LTD. ALL RIGHTS RESERVED
                 </div>
         </div>
         </div>

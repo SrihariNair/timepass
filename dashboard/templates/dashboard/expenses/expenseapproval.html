@@ -13,22 +13,41 @@
       </h2>
 <ul>
  {% for post in expenses %}
-    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">{{post.date}}<a href="{% url 'dashboard:delete' post.id %}" class="btn btn-danger btn-sm">
-                <i class="fa fa-trash" aria-hidden="true" style="color: black"></i>
-                Delete
-            </a></span>
-        <h4>{{ post.author }}</h4><br>
-        <h4>{{ post.subject }}</h4><br>
-        <h4>{{ post.text }}</h4><br>
-        <h4>{{ post.date }}</h4><br>
-        <a href="{{post.file.url}}">Expense - {{post.author}}</a>
-        <h4>{{ post.approval }}</h4>
+    <div class="w3-container w3-card w3-white w3-round w3-margin">
+        <span class="w3-right w3-opacity">{{post.date}}</span>
+        <br><hr>
+        <h4>Subject:</h4><p>{{ post.subject }}</p><hr>
+        <h4>Text:</h4><p>{{ post.text }}</p><hr>
+        <h4>Date:</h4><p>{{ post.date }}</p><hr>
+                <h4>Amount:</h4><p>{{ post.amount }}</p><hr>
+
+        <h4>File:</h4>
+        <a href="{{post.file.url}}">Expense - {{post.author}}</a><hr>
+        <h4>Approval</h4>
+        <p>{{ post.approval }}</p>
         <hr class="w3-clear">
       </div>
-
     {% endfor %}
 </ul>
+
+       <span class="current">
+            Page {{ expenses.number }} of {{ expenses.paginator.num_pages }}
+      </span><br>
+
+
+  {% if expenses.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ expenses.previous_page_number }}" class="previous round"><span class="prevarrow">&#8249;</span></a>
+  {% endif %}
+
+      {% if expenses.has_next %}
+      <a href="?page={{ expenses.next_page_number }}" class="next round"><span class="nextarrow">&#8250;</span></a>
+      <a href="?page={{ expenses.paginator.num_pages }}">Last </a>
+
+      {% endif %}
+
+
+
 </div>
 </div>
 {% endblock %}

@@ -45,16 +45,20 @@ def birthdaylist(request):
 
 def profile(request):
     if request.user.is_authenticated:
-            return render(request,'dashboard/profile.html')
+            return render(request,'dashboard/profile/profile.html')
     else:
         return redirect('login')
 
 def home(request):
     announces = Announcement.objects.order_by('-created_date').all()
-    doc = Document.objects.filter(pk=1)
+    paginator = Paginator(announces, 3)
+    page = request.GET.get('page')
+    announces = paginator.get_page(page)
+
+
+
     if(request.user.is_authenticated):
         context={
-            'doc':doc,
             'announcements' : announces,
         }
         return render(request,'dashboard/home.html',context=context)
@@ -73,8 +77,12 @@ def new_posts(request):
 
             return redirect('dashboard:posts')
     else:
-        form = PostForm()
-        return render(request, 'dashboard/new_post.html', {'form': form})
+        if (request.user.is_authenticated):
+
+            form = PostForm()
+            return render(request, 'dashboard/post/new_post.html', {'form': form})
+        else:
+            return redirect('login')
 
 
 def PostLists(request):
@@ -87,19 +95,21 @@ def PostLists(request):
         'object_list': exp
     }
     if (request.user.is_authenticated):
-        return render(request, 'dashboard/postlist.html', context=context)
+        return render(request, 'dashboard/post/postlist.html', context=context)
     else:
         return redirect('login')
 
 
-
 def approval(request):
     leaves = request.user.leaveapplication_set.all().order_by('-created_date')
+    paginator = Paginator(leaves, 3)
+    page = request.GET.get('page')
+    leaves = paginator.get_page(page)
     context = {
         'leaves': leaves,
     }
-    if (request.user.is_authenticated):
-        return render(request, 'dashboard/approval.html', context=context)
+    if request.user.is_authenticated:
+        return render(request, 'dashboard/leaves/approval.html', context=context)
     else:
         return redirect('home')
 
@@ -113,8 +123,11 @@ def applyleave(request):
             post.save()
             return redirect('dashboard:approval')
     else:
-        form = LeaveForm()
-        return render(request, 'dashboard/applyleave.html', {'form': form})
+        if request.user.is_authenticated:
+            form = LeaveForm()
+            return render(request, 'dashboard/leaves/applyleave.html', {'form': form})
+        else:
+            return redirect('login')
 
 
 
@@ -122,23 +135,27 @@ class PostDelete(UserPassesTestMixin,generic.DeleteView):
 
     model = Post
     raise_exception = True
-    template_name = 'dashboard/post_delete.html'
+    template_name = 'dashboard/post/post_delete.html'
     success_url = reverse_lazy('dashboard:posts')
     def test_func(self):
         self.object=self.get_object()
         return self.object.author == self.request.user
 
 
-
 def expenseapproval(request):
     expenses = request.user.expenseapplication_set.all().order_by('-created_date')
+    paginator = Paginator(expenses, 3)
+    page = request.GET.get('page')
+    expenses = paginator.get_page(page)
     context = {
         'expenses': expenses,
     }
     if (request.user.is_authenticated):
-        return render(request, 'dashboard/expenseapproval.html', context=context)
+        return render(request, 'dashboard/expenses/expenseapproval.html', context=context)
     else:
         return redirect('home')
+
+
 
 
 def applyexpense(request):
@@ -150,13 +167,16 @@ def applyexpense(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            print("SUCCESSSSSSS")
+
             return redirect('dashboard:expenseapproval')
         else:
             return HttpResponse('Somethings Fishy')
     else:
-        form = ExpenseForm()
-        return render(request, 'dashboard/applyexpense.html', {'form': form})
+        if (request.user.is_authenticated):
+            form = ExpenseForm()
+            return render(request, 'dashboard/expenses/applyexpense.html', {'form': form})
+        else:
+            return redirect('login')
 
 
 def announcements(request):
@@ -171,5 +191,26 @@ def announcements(request):
         else:
             return HttpResponse('Somethings Fishy')
     else:
-        form = AnnouncementForm()
-        return render(request, 'dashboard/announcement.html', {'form': form})
+        if (request.user.is_authenticated):
+            form = AnnouncementForm()
+            return render(request, 'dashboard/announcement.html', {'form': form})
+        else:
+            return redirect('login')
+
+class ProfileEdit(UserPassesTestMixin,generic.UpdateView):
+    model = CustomUser
+    raise_exception = True
+    fields = ['email','name','gender','resume', 'blood_group', 'contact_number', 'emergency_contact_name','emergency_contact_number', 'address']
+    success_url = reverse_lazy('dashboard:profile')
+    template_name = 'dashboard/profile/edit.html'
+
+    def test_func(self):
+        self.object = self.get_object()
+        return self.object == self.request.user
+
+
+
+class Documents(LoginRequiredMixin,generic.ListView):
+    raise_exception = True
+    model = Document
+    template_name = 'dashboard/documents.html'
